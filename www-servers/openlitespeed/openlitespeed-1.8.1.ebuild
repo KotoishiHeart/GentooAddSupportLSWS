@@ -11,7 +11,7 @@ DESCRIPTION="LiteSpeed QUIC (LSQUIC) Library"
 HOMEPAGE="https://github.com/litespeedtech/lsquic/"
 SRC_URI="
 	https://github.com/litespeedtech/openlitespeed/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
-	https://github.com/google/boringssl/archive/${BORINGSSL_COMMIT}.tar.gz -> boringssl-fips-20230428.tar.gz
+	https://github.com/google/boringssl/archive/${BORINGSSL_COMMIT}.tar.gz -> boringssl-9fc1c3.tar.gz
 "
 
 LICENSE="MIT"
@@ -38,14 +38,14 @@ RDEPEND="
     acct-group/lsadm"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-link-boringssl-static-libs.patch
+	"${FILESDIR}"/${PN}-link-boringssl-static-libs-9fc1c3.patch
 	"${FILESDIR}"/${PN}-disable-build-deps-libs.patch
 	"${FILESDIR}"/${PN}-add-install-files.patch
 )
 
 src_unpack() {
 	default
-	unpack boringssl-fips-20230428.tar.gz
+	unpack boringssl-9fc1c3.tar.gz
 	mv boringssl-${BORINGSSL_COMMIT} "${S}"/src/boringssl || die
 }
 
