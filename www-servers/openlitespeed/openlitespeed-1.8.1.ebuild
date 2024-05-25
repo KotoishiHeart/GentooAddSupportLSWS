@@ -5,7 +5,7 @@ EAPI=8
 
 inherit cmake
 
-BORINGSSL_COMMIT="15655052e8701f908937204785eaa8cd4363099f"
+BORINGSSL_COMMIT="9fc1c33e9c21439ce5f87855a6591a9324e569fd"
 
 DESCRIPTION="LiteSpeed QUIC (LSQUIC) Library"
 HOMEPAGE="https://github.com/litespeedtech/lsquic/"
