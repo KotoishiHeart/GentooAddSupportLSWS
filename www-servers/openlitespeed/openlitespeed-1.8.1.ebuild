@@ -66,11 +66,20 @@ src_configure() {
 
 	sed -e "s/%ADMIN_PORT%/$OPENLSWS_ADMINPORT/" "${S}/dist/admin/conf/admin_config.conf.in" > "${S}/dist/admin/conf/admin_config.conf"
 	sed -e "s/%USER%/$OPENLSWS_USER/" -e "s/%GROUP%/$OPENLSWS_GROUP/" -e "s#%DEFAULT_TMP_DIR%#$DEFAULT_TMP_DIR#"  -e "s/%ADMIN_EMAIL%/$OPENLSWS_EMAIL/" -e "s/%HTTP_PORT%/$OPENLSWS_EXAMPLEPORT/" -e "s/%RUBY_BIN%/$RUBY_PATH/"  "${S}/dist/conf/httpd_config.conf.in" > "${S}/dist/conf/httpd_config.conf"
-    sed "s:%LSWS_CTRL%:$SERVERROOT/bin/lswsctrl:" "${S}/dist/admin/misc/lsws.rc.in" > "${S}/dist/admin/misc/lsws.rc"
-    sed "s:%LSWS_CTRL%:$SERVERROOT/bin/lswsctrl:" "${S}/dist/admin/misc/lsws.rc.gentoo.in" > "${S}/dist/admin/misc/lsws.rc.gentoo"
-    sed "s:%LSWS_CTRL%:$SERVERROOT/bin/lswsctrl:" "${S}/dist/admin/misc/lshttpd.service.in" > "${S}/dist/admin/misc/lshttpd.service"
+	sed "s:%LSWS_CTRL%:$SERVERROOT/bin/lswsctrl:" "${S}/dist/admin/misc/lsws.rc.in" > "${S}/dist/admin/misc/lsws.rc"
+	sed "s:%LSWS_CTRL%:$SERVERROOT/bin/lswsctrl:" "${S}/dist/admin/misc/lsws.rc.gentoo.in" > "${S}/dist/admin/misc/lsws.rc.gentoo"
+	sed "s:%LSWS_CTRL%:$SERVERROOT/bin/lswsctrl:" "${S}/dist/admin/misc/lshttpd.service.in" > "${S}/dist/admin/misc/lshttpd.service"
 
 	local mycmakeargs=(
 	)
 	cmake_src_configure
+}
+
+src_install() {
+	default
+	if use systemd ; then
+		systemd_dounit admin/misc/lshttpd.service || die
+	else
+		doinitd ${D}/admin/misc/lsws.rc.gentoo  || die
+	fi
 }
