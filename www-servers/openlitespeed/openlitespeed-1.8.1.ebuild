@@ -77,7 +77,8 @@ src_configure() {
 
 src_install() {
 	default
-	if use systemd; then
+	if use systemd
+	then
 		systemd_dounit admin/misc/lshttpd.service || die
 	else
 		doinitd ${D}/admin/misc/lsws.rc.gentoo  || die
