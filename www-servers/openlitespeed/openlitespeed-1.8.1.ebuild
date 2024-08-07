@@ -18,7 +18,7 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64"
 
-IUSE="static-libs ruby"
+IUSE="static-libs ruby systemd"
 RESTRICT=""
 
 DEPEND="
@@ -77,8 +77,7 @@ src_configure() {
 
 src_install() {
 	default
-	if use systemd
-	then
+	if use systemd; then
 		systemd_dounit "${D}"/admin/misc/lshttpd.service || die
 	else
 		doinitd ${D}/admin/misc/lsws.rc.gentoo  || die
