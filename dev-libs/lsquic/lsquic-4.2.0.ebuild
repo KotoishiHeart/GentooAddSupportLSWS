@@ -32,7 +32,6 @@ RDEPEND="
 PATCHES=(
 	"${FILESDIR}"/${PN}-disable-build-deps-libs.patch
 	"${FILESDIR}"/${PN}-disable-override-flags.patch
-	"${FILESDIR}"/${PN}-disable-boring-override-flags.patch
 	"${FILESDIR}"/${PN}-c23.patch
 )
 
