@@ -36,6 +36,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-link-boringssl-static-libs-9fc1c.patch
 	"${FILESDIR}"/${PN}-disable-override-flags.patch
 	"${FILESDIR}"/${PN}-disable-boring-override-flags.patch
+	"${FILESDIR}"/${PN}-c23.patch
 )
 
 src_unpack() {
