@@ -36,12 +36,6 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-c23.patch
 )
 
-src_unpack() {
-	unpack ${P}.tar.gz
-	unpack boringssl-9fc1c.tar.gz
-	mv boringssl-${BORINGSSL_COMMIT} "${S}"/src/liblsquic/boringssl || die
-}
-
 src_configure() {
 	local mycmakeargs=(
 		-DLSQUIC_SHARED_LIB=ON
